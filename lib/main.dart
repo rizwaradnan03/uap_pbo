@@ -28,8 +28,8 @@ class MenuScreen extends StatelessWidget {
         title: 'Dokter',
         icon: Icons.local_hospital,
         onTap: (BuildContext context) {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => MainDokter()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => MainDokter()));
         }),
     MenuOption(
         title: 'Pasien',
@@ -43,7 +43,7 @@ class MenuScreen extends StatelessWidget {
         icon: Icons.calendar_today,
         onTap: (BuildContext context) {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const MainPenjadwalan()));
+              MaterialPageRoute(builder: (context) => MainPenjadwalan()));
         }),
   ];
 
