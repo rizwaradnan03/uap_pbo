@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uap_pbo/option/MenuOption.dart';
+import 'package:uap_pbo/pages/dokter/list_dokter.dart';
 import 'package:uap_pbo/pages/dokter/tambah_dokter.dart';
 
 class MainDokter extends StatelessWidget {
@@ -9,9 +10,19 @@ class MainDokter extends StatelessWidget {
     MenuOption(
         title: 'Lihat Daftar Dokter',
         icon: Icons.person,
-        onTap: (BuildContext context) {}),
+        onTap: (BuildContext context) {
+          Navigator.push(context, 
+          MaterialPageRoute(builder: (context) => const ListDokter()));
+        }),
     MenuOption(
         title: 'Tambah Dokter',
+        icon: Icons.plus_one_rounded,
+        onTap: (BuildContext context) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const TambahDokter()));
+        }),
+    MenuOption(
+        title: 'Input Jadwal Dokter',
         icon: Icons.plus_one_rounded,
         onTap: (BuildContext context) {
           Navigator.push(context,
@@ -27,9 +38,9 @@ class MainDokter extends StatelessWidget {
         children: [
           const Padding(
             padding: EdgeInsets.all(8.0),
-            child: const Text(
+            child: Text(
               "Menu Dokter",
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ),
           Expanded(
