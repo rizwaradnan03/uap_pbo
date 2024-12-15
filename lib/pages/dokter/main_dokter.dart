@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uap_pbo/option/MenuOption.dart';
+import 'package:uap_pbo/pages/dokter/input_jadwal_dokter.dart';
 import 'package:uap_pbo/pages/dokter/list_dokter.dart';
 import 'package:uap_pbo/pages/dokter/tambah_dokter.dart';
 
@@ -26,7 +27,7 @@ class MainDokter extends StatelessWidget {
         icon: Icons.plus_one_rounded,
         onTap: (BuildContext context) {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const TambahDokter()));
+              MaterialPageRoute(builder: (context) => const InputJadwalDokter()));
         }),
   ];
 

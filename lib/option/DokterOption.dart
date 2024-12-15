@@ -26,6 +26,13 @@ class DokterOption {
     return {'isFound': isFound, 'dokter': dokter};
   }
 
+  dynamic searchDokter(nama){
+    var isFound = checkIsFound(nama);
+    if(isFound == true){
+      return {'dokter': isFound['dokter']};
+    }
+  }
+
   bool tambahData() {
     var isFound = checkIsFound(nama);
     if (isFound['isFound'] == false) {
@@ -48,6 +55,14 @@ class DokterOption {
       print("Dokter Dengan Nama ${nama} tidak ditemukan!");
     }
   }
+
+  // bool tambahJadwal(nama, PenjadwalanOption penjadwala){
+  //   var isFound = checkIsFound(nama);
+
+  //   if(isFound['isFound'] == true){
+
+  //   }
+  // }
 
   void selesaiJadwal(nama, PenjadwalanOption penjadwalan) {
     var isFound = checkIsFound(nama);

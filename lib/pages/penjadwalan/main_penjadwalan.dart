@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uap_pbo/main.dart';
 import 'package:uap_pbo/option/MenuOption.dart';
 import 'package:uap_pbo/pages/penjadwalan/list_penjadwalan.dart';
 import 'package:uap_pbo/pages/penjadwalan/tambah_penjadwalan.dart';
@@ -31,6 +32,15 @@ class MainPenjadwalan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Penjadwalan"),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => MyApp()));
+          },
+        ),
+      ),
         body: Center(
       child: Column(
         children: [
