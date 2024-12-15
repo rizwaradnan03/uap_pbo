@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uap_pbo/database/data.dart';
 import 'package:uap_pbo/option/DokterOption.dart';
+import 'package:uap_pbo/pages/dokter/main_dokter.dart';
 
 class TambahDokter extends StatefulWidget {
   const TambahDokter({super.key});
@@ -27,14 +28,26 @@ class _TambahDokterState extends State<TambahDokter> {
         nama: _namaController.text,
         umur: int.parse(_umurController.text),
         spesialis: _spesialisController.text);
-    dokter.tambahData();
 
-    print("Data Dokter : ${dataDokter}");
+    var tambah = dokter.tambahData();
+    if (tambah == false) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Gagal Membuat Data Dokter Dikarenakan Duplikasi!")));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Sukses Membuat Data Dokter!")));
+
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => MainDokter()));
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Tambah"),
+      ),
       body: Column(
         children: [
           const Padding(
@@ -82,7 +95,22 @@ class _TambahDokterState extends State<TambahDokter> {
                   return null;
                 },
               ),
-              ElevatedButton(onPressed: _submit, child: Text("Submit Tombol"))
+              Card(
+                margin: const EdgeInsets.symmetric(vertical: 30),
+                child: ElevatedButton(
+                    onPressed: _submit,
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        padding: const EdgeInsetsDirectional.symmetric(
+                            vertical: 18, horizontal: 18)),
+                    child: const Text(
+                      "Submit Tombol",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    )),
+              ),
             ]),
           ))
         ],
