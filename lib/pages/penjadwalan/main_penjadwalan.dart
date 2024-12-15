@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uap_pbo/option/MenuOption.dart';
+import 'package:uap_pbo/pages/penjadwalan/list_penjadwalan.dart';
 import 'package:uap_pbo/pages/penjadwalan/tambah_penjadwalan.dart';
 
 class MainPenjadwalan extends StatelessWidget {
@@ -9,7 +10,13 @@ class MainPenjadwalan extends StatelessWidget {
     MenuOption(
         title: 'Lihat Daftar Penjadwalan',
         icon: Icons.access_time,
-        onTap: (BuildContext context) {}),
+        onTap: (BuildContext context) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ListPenjadwalan(),
+              ));
+        }),
     MenuOption(
         title: 'Tambah Penjadwalan',
         icon: Icons.view_agenda,
