@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uap_pbo/option/MenuOption.dart';
+import 'package:uap_pbo/pages/dokter/tambah_dokter.dart';
 
 class MainDokter extends StatelessWidget {
   MainDokter({super.key});
@@ -12,7 +13,10 @@ class MainDokter extends StatelessWidget {
     MenuOption(
         title: 'Tambah Dokter',
         icon: Icons.plus_one_rounded,
-        onTap: (BuildContext context) {}),
+        onTap: (BuildContext context) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const TambahDokter()));
+        }),
   ];
 
   @override

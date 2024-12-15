@@ -8,8 +8,34 @@ class TambahDokter extends StatefulWidget {
 }
 
 class _TambahDokterState extends State<TambahDokter> {
+  final TextEditingController _namaController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: const Text("Tambah Dokter"),
+          ),
+          Expanded(
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: _namaController,
+                  decoration: const InputDecoration(
+                    labelText: "Nama"
+                  ),
+                  // validator: (value){
+                  //   if (value == null || value.isEmpty){
+                  //     return const SnackBar(content: Text("Nama Tidak Boleh Kosong!"));
+                  //   }
+                  // },
+                )
+            ]),
+          )
+        ],
+      ),
+    );
   }
 }
