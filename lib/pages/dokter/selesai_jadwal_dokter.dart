@@ -76,6 +76,15 @@ class _SelesaiJadwalDokterState extends State<SelesaiJadwalDokter> {
                         onPressed: _searchByNama,
                         child: const Text('Cari'),
                       ),
+                      isFound == true? Column(
+                        children: [
+                          DropdownButton<PenjadwalanOption> (
+                            value: _selectedListPraktek,
+                            hint: const Text("Pilih Jawdwal untuk Dihapus"),
+                            items: penjadwalan.
+                          )
+                        ],
+                      )
                     ],
                   ),
                 ),
