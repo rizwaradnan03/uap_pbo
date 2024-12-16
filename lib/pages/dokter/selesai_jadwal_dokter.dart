@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:uap_pbo/database/data.dart';
+import 'package:uap_pbo/option/PenjadwalanOption.dart';
 
 class SelesaiJadwalDokter extends StatefulWidget {
   const SelesaiJadwalDokter({super.key});
@@ -10,7 +12,26 @@ class SelesaiJadwalDokter extends StatefulWidget {
 class _SelesaiJadwalDokterState extends State<SelesaiJadwalDokter> {
   final TextEditingController _searchByNamaController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
   bool isFound = false;
+
+  PenjadwalanOption? penjadwalan;
+
+  void _searchByNama() {
+    bool isDokterFound = false;
+
+    for (int i = 0; i < dataDokter.length; i++) {
+      if (_searchByNamaController.text == dataDokter[i].nama) {
+        isDokterFound = true;
+        penjadwalan = dataDokter[i].listPraktek as PenjadwalanOption?;
+        break;
+      }
+    }
+
+    if (isDokterFound == true) {
+      debugPrint("Penjadwalan Dokter nyaah ${penjadwalan}");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,16 +72,7 @@ class _SelesaiJadwalDokterState extends State<SelesaiJadwalDokter> {
                       ),
                       const SizedBox(height: 20),
                       ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            // Jika valid, lakukan sesuatu
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Pencarian berhasil"),
-                              ),
-                            );
-                          }
-                        },
+                        onPressed: _searchByNama,
                         child: const Text('Cari'),
                       ),
                     ],

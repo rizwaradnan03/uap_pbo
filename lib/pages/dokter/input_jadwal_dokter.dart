@@ -5,6 +5,8 @@ import 'package:intl/intl.dart';
 import 'package:uap_pbo/database/data.dart';
 import 'package:uap_pbo/option/DokterOption.dart';
 import 'package:uap_pbo/option/PenjadwalanOption.dart';
+import 'package:uap_pbo/pages/dokter/main_dokter.dart';
+import 'package:uap_pbo/pages/penjadwalan/main_penjadwalan.dart';
 
 class InputJadwalDokter extends StatefulWidget {
   const InputJadwalDokter({super.key});
@@ -20,6 +22,7 @@ class _InputJadwalDokterState extends State<InputJadwalDokter> {
 
   bool isFound = false;
 
+  DokterOption? dokter;
   PenjadwalanOption? _selectedListPraktek;
 
   void _submit() {
@@ -28,10 +31,15 @@ class _InputJadwalDokterState extends State<InputJadwalDokter> {
           content: Text("Nama Dokter & Tanggal Prakter Tidak Boleh Kosong!")));
       return;
     }
+    dokter?.tambahListPraktek(_selectedListPraktek!);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Berhasil Menambahkan Jadwal Dokter!")));
+
+    Navigator.push(context, MaterialPageRoute(builder: (context) => MainDokter()));
   }
 
   void _cariDokter() {
-    DokterOption? dokter;
     if (_searchByNamaController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Nama Dokter Tidak Boleh Kosong!!")));
@@ -104,13 +112,17 @@ class _InputJadwalDokterState extends State<InputJadwalDokter> {
                             DropdownButton<PenjadwalanOption>(
                               value: _selectedListPraktek,
                               hint: const Text("Pilih Jadwal"),
-                              items: dataPenjadwalan.map((PenjadwalanOption item){
+                              items: dataPenjadwalan
+                                  .where((PenjadwalanOption item) =>
+                                      item.isDone == false)
+                                  .map((item) {
                                 return DropdownMenuItem<PenjadwalanOption>(
                                   value: item,
-                                  child: Text("(${item.hari}) ${item.waktuMulai} - ${item.waktuSelesai}"),
+                                  child: Text(
+                                      "(${item.hari}) ${item.waktuMulai} - ${item.waktuSelesai}"),
                                 );
                               }).toList(),
-                              onChanged: (PenjadwalanOption? newValue){
+                              onChanged: (PenjadwalanOption? newValue) {
                                 setState(() {
                                   _selectedListPraktek = newValue;
                                 });

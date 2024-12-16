@@ -5,7 +5,7 @@ class PenjadwalanOption {
   String hari;
   DateTime waktuMulai;
   DateTime waktuSelesai;
-  bool? isDone = false;
+  bool isDone = false;
 
   Map<String, dynamic> checkIsFound(hari, waktuMulai, waktuSelesai) {
     bool isFound = false;
@@ -37,5 +37,5 @@ class PenjadwalanOption {
   PenjadwalanOption(
       {required this.hari,
       required this.waktuMulai,
-      required this.waktuSelesai, this.isDone});
+      required this.waktuSelesai});
 }

@@ -8,8 +8,8 @@ class DokterOption {
   List<PenjadwalanOption> listPraktek = [];
 
   void tambahListPraktek(PenjadwalanOption penjadwalan) {
+    penjadwalan.isDone = true;
     listPraktek.add(penjadwalan);
-    print("(Dokter) Jadwal Telah Ditambahkan!");
   }
 
   Map<String, dynamic> checkIsFound(nama) {
@@ -26,9 +26,9 @@ class DokterOption {
     return {'isFound': isFound, 'dokter': dokter};
   }
 
-  dynamic searchDokter(nama){
+  dynamic searchDokter(nama) {
     var isFound = checkIsFound(nama);
-    if(isFound == true){
+    if (isFound['isFound'] == true) {
       return {'dokter': isFound['dokter']};
     }
   }
@@ -39,21 +39,16 @@ class DokterOption {
       dataDokter.add(this);
       print("(Dokter) Data Dokter Telah Ditambahkan!");
       return true;
-    }else{
+    } else {
       print("(Dokter) Data Dokter Tidak Boleh Ada Duplikasi!");
       return false;
     }
   }
 
   void editData(nama, umur, spesialis) {
-    var isFound = checkIsFound(nama);
-
-    if (isFound['isFound'] == true) {
-      isFound['dokter'].umur = umur;
-      isFound['dokter'].spesialis = spesialis;
-    } else {
-      print("Dokter Dengan Nama ${nama} tidak ditemukan!");
-    }
+    this.nama = nama;
+    this.umur = int.parse(umur);
+    this.spesialis = spesialis;
   }
 
   // bool tambahJadwal(nama, PenjadwalanOption penjadwala){
