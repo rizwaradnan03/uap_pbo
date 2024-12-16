@@ -51,11 +51,11 @@ class DokterOption {
     this.spesialis = spesialis;
   }
 
-  // bool tambahJadwal(nama, PenjadwalanOption penjadwala){
-  //   var isFound = checkIsFound(nama);
+  // int indexHapusDokter(nama){
+  //   bool isFound = false;
 
-  //   if(isFound['isFound'] == true){
-
+  //   for(int i = 0;i < dataDokter.length;i++){
+      
   //   }
   // }
 
