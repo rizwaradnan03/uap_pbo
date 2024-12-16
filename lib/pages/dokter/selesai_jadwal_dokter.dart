@@ -22,6 +22,7 @@ class _SelesaiJadwalDokterState extends State<SelesaiJadwalDokter> {
 
     for (int i = 0; i < dataDokter.length; i++) {
       if (_searchByNamaController.text == dataDokter[i].nama) {
+        isFound = true;
         isDokterFound = true;
         penjadwalan = dataDokter[i].listPraktek as PenjadwalanOption?;
         break;
