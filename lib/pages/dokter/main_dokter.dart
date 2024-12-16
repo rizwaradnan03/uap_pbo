@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:uap_pbo/main.dart';
 import 'package:uap_pbo/option/MenuOption.dart';
 import 'package:uap_pbo/pages/dokter/edit_dokter.dart';
+import 'package:uap_pbo/pages/dokter/hapus_dokter.dart';
 import 'package:uap_pbo/pages/dokter/input_jadwal_dokter.dart';
 import 'package:uap_pbo/pages/dokter/list_dokter.dart';
 import 'package:uap_pbo/pages/dokter/selesai_jadwal_dokter.dart';
@@ -31,6 +32,13 @@ class MainDokter extends StatelessWidget {
         onTap: (BuildContext context) {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const EditDokter()));
+        }),
+    MenuOption(
+        title: 'Hapus Dokter',
+        icon: Icons.delete,
+        onTap: (BuildContext context) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const HapusDokter()));
         }),
     MenuOption(
         title: 'Input Jadwal Dokter',
