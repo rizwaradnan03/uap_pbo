@@ -14,8 +14,8 @@ class _SelesaiJadwalDokterState extends State<SelesaiJadwalDokter> {
   final _formKey = GlobalKey<FormState>();
 
   bool isFound = false;
-
-  PenjadwalanOption? penjadwalan;
+  PenjadwalanOption? _selectedListPraktek;
+ List<PenjadwalanOption?> penjadwalan = [];
 
   void _searchByNama() {
     bool isDokterFound = false;
@@ -24,7 +24,7 @@ class _SelesaiJadwalDokterState extends State<SelesaiJadwalDokter> {
       if (_searchByNamaController.text == dataDokter[i].nama) {
         isFound = true;
         isDokterFound = true;
-        penjadwalan = dataDokter[i].listPraktek as PenjadwalanOption?;
+        penjadwalan.addAll(dataDokter[i].listPraktek as List<PenjadwalanOption?>);
         break;
       }
     }
@@ -81,10 +81,21 @@ class _SelesaiJadwalDokterState extends State<SelesaiJadwalDokter> {
                           DropdownButton<PenjadwalanOption> (
                             value: _selectedListPraktek,
                             hint: const Text("Pilih Jawdwal untuk Dihapus"),
-                            items: penjadwalan.
-                          )
+                            items: penjadwalan.where(( item)=>item !=null).map((item){
+                              return DropdownMenuItem<PenjadwalanOption>(
+                                value: item,
+                                child: Text(
+                                      "(${item?.hari}) ${item?.waktuMulai} - ${item?.waktuSelesai}"),
+                              );
+                            }).toList(),
+                            onChanged: (PenjadwalanOption? newValue){
+                              setState(() {
+                                _selectedListPraktek = newValue;
+                              });
+                            },
+                          ),ElevatedButton(onPressed: _submit,)
                         ],
-                      )
+                      ):SizedBox.shrink(),
                     ],
                   ),
                 ),
