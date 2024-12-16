@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uap_pbo/main.dart';
 import 'package:uap_pbo/option/MenuOption.dart';
+import 'package:uap_pbo/pages/penjadwalan/hapus_penjadwalan.dart';
 import 'package:uap_pbo/pages/penjadwalan/list_penjadwalan.dart';
 import 'package:uap_pbo/pages/penjadwalan/tambah_penjadwalan.dart';
 
@@ -27,54 +28,65 @@ class MainPenjadwalan extends StatelessWidget {
               MaterialPageRoute(
                   builder: (context) => const TambahPenjadwalan()));
         }),
+    MenuOption(
+        title: 'Hapus Penjadwalan',
+        icon: Icons.delete_forever,
+        onTap: (BuildContext context) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const HapusPenjadwalan()));
+        }),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Penjadwalan"),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => MyApp()));
-          },
-        ),
-      ),
-        body: Center(
-      child: Column(
-        children: [
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: const Text(
-              "Menu Penjadwalan",
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-            ),
+        appBar: AppBar(
+          title: const Text("Penjadwalan"),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => MyApp()));
+            },
           ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: menuPenjadwalans.length,
-              itemBuilder: (context, int index) {
-                final option = menuPenjadwalans[index];
-                return Card(
-                  child: ListTile(
-                    leading: Icon(option.icon,
-                        size: 40,
-                        color: const Color.fromARGB(255, 175, 76, 158)),
-                    title: Text(option.title,
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: const Color.fromARGB(255, 175, 76, 162))),
-                    onTap: () {
-                      option.onTap(context);
-                    },
-                  ),
-                );
-              },
-            ),
-          )
-        ],
-      ),
-    ));
+        ),
+        body: Center(
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: const Text(
+                  "Menu Penjadwalan",
+                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: menuPenjadwalans.length,
+                  itemBuilder: (context, int index) {
+                    final option = menuPenjadwalans[index];
+                    return Card(
+                      child: ListTile(
+                        leading: Icon(option.icon,
+                            size: 40,
+                            color: const Color.fromARGB(255, 175, 76, 158)),
+                        title: Text(option.title,
+                            style: TextStyle(
+                                fontSize: 20,
+                                color:
+                                    const Color.fromARGB(255, 175, 76, 162))),
+                        onTap: () {
+                          option.onTap(context);
+                        },
+                      ),
+                    );
+                  },
+                ),
+              )
+            ],
+          ),
+        ));
   }
 }
