@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // Add this import for date formatting
 import 'package:uap_pbo/option/PenjadwalanOption.dart';
+import 'package:uap_pbo/pages/penjadwalan/main_penjadwalan.dart';
 
 class TambahPenjadwalan extends StatefulWidget {
   const TambahPenjadwalan({super.key});
@@ -78,7 +79,18 @@ class _TambahPenjadwalanState extends State<TambahPenjadwalan> {
         hari: _hariController.text,
         waktuMulai: _selectedWaktuMulai!, // Use the formatted date text
         waktuSelesai: _selectedWaktuSelesai!);
-    penjadwalan.tambahData();
+    var tambah = penjadwalan.tambahData();
+    if (tambah == false) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content:
+              Text("Gagal Membuat Data Penjadwalan Dikarenakan Duplikasi!")));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Sukses Membuat Data Penjadwalan")));
+
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => MainPenjadwalan()));
+    }
 
     // Debugging print statement for Penjadwalan object
     print("Data Penjadwalan : ${penjadwalan}");
@@ -99,7 +111,7 @@ class _TambahPenjadwalanState extends State<TambahPenjadwalan> {
           Expanded(
             child: Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 30.0, vertical: 18),
+                  const EdgeInsets.symmetric(horizontal: 30.0, vertical: 18.0),
               child: Column(
                 children: [
                   TextFormField(
