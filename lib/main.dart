@@ -36,7 +36,7 @@ class MenuScreen extends StatelessWidget {
         icon: Icons.people,
         onTap: (BuildContext context) {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const MainPasien()));
+              MaterialPageRoute(builder: (context) => MainPasien()));
         }),
     MenuOption(
         title: 'Penjadwalan',

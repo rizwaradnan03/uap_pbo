@@ -30,7 +30,7 @@ class _HapusPasienState extends State<HapusPasien> {
       context, MaterialPageRoute(builder: (context) => MainPasien()));
     }else{
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Gagal Menghapus Data Pasien!")));
+        const SnackBar(content: Text("Tidak Dapat Menemukan Data Pasien!")));
     }
   }
 
