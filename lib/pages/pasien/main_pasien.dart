@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uap_pbo/option/MenuOption.dart';
+import 'package:uap_pbo/pages/pasien/list_pasien.dart';
 import 'package:uap_pbo/pages/pasien/tambah_pasien.dart';
 
 class MainPasien extends StatelessWidget {
@@ -10,7 +11,7 @@ class MainPasien extends StatelessWidget {
         icon: Icons.person,
         onTap: (BuildContext context) {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const TambahPasien()));
+              MaterialPageRoute(builder: (context) => const ListPasien()));
         }),
     MenuOption(
         title: 'Tambahkan Pasien',
@@ -19,13 +20,6 @@ class MainPasien extends StatelessWidget {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const TambahPasien()));
         }),
-    MenuOption(
-        title: 'Input Data Pasien',
-        icon: Icons.plus_one_rounded,
-        onTap: (BuildContext context) {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const TambahPasien()));
-        })
   ];
 
   @override
@@ -59,8 +53,6 @@ class MainPasien extends StatelessWidget {
             },
           ),
         )
-
-        //Text("tot")
       ].toList())),
     );
   }

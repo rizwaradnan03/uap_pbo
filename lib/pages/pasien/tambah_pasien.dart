@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:uap_pbo/option/PasienOption.dart';
+import 'package:uap_pbo/pages/pasien/main_pasien.dart';
 
 class TambahPasien extends StatefulWidget {
   const TambahPasien({super.key});
@@ -19,16 +21,36 @@ class _TambahPasienState extends State<TambahPasien> {
       return;
     }
 
-    // Logika submit (contoh)
-    print("Nama: ${_namaController.text}");
-    print("Umur: ${_umurController.text}");
+    try {
+      var pasien = PasienOption(
+        nama: _namaController.text,
+        umur: int.parse(_umurController.text),
+      );
+
+      var tambah = pasien.tambahData();
+      if (tambah == false) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text("Gagal Membuat Data Pasien Karena Sudah Terdaftar!")));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Sukses Membuat Data Pasien!")));
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MainPasien()),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Terjadi kesalahan, cek kembali data Anda!")));
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Tambah Pasien"),
+        title: const Text("Tambahkan Pasien"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -36,31 +58,19 @@ class _TambahPasienState extends State<TambahPasien> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              "Tambah Pasien",
+              "Tambahkan Pasien",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
             TextFormField(
               controller: _namaController,
               decoration: const InputDecoration(labelText: "Nama"),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return "Nama tidak boleh kosong!";
-                }
-                return null;
-              },
             ),
             const SizedBox(height: 16),
             TextFormField(
               controller: _umurController,
               decoration: const InputDecoration(labelText: "Umur"),
               keyboardType: TextInputType.number,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return "Umur tidak boleh kosong!";
-                }
-                return null;
-              },
             ),
             const SizedBox(height: 30),
             Center(
