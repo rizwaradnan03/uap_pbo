@@ -1,8 +1,81 @@
 import 'package:flutter/material.dart';
 import 'package:uap_pbo/database/data.dart';
+import 'package:uap_pbo/option/DokterOption.dart';
+import 'package:uap_pbo/option/PendaftaranOption.dart';
+import 'package:uap_pbo/option/PenjadwalanOption.dart';
 
-class ListPendaftaran extends StatelessWidget {
+class ListPendaftaran extends StatefulWidget {
   const ListPendaftaran({super.key});
+
+  @override
+  _ListPendaftaranState createState() => _ListPendaftaranState();
+}
+
+class _ListPendaftaranState extends State<ListPendaftaran> {
+  late List<PendaftaranOption> _dataPendaftaran;
+  List<PenjadwalanOption> penjadwalan = [];
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _dataPendaftaran = dataPendaftaran;
+  // }
+
+  void _handleSelesai(PendaftaranOption pendaftaran) {
+    bool isFoundDokter = false;
+    DokterOption? dokter;
+    for (int i = 0; i < dataDokter.length; i++) {
+      if (dataDokter[i].nama == pendaftaran.dokter!.nama) {
+        dokter = dataDokter[i];
+        isFoundDokter = true;
+        break;
+      }
+    }
+
+    if (dokter == null && isFoundDokter == false) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Tidak Dapat Menyelesaikan Pendafataran")));
+      return;
+    }
+
+    bool isSuccessedRemoveListPraktekFromDokter = false;
+    for (int i = 0; i < dokter!.listPraktek.length; i++) {
+      if (dokter.listPraktek[i].hari == pendaftaran.penjadwalan!.hari &&
+          dokter.listPraktek[i].waktuMulai ==
+              pendaftaran.penjadwalan!.waktuMulai &&
+          dokter.listPraktek[i].waktuSelesai ==
+              pendaftaran.penjadwalan!.waktuSelesai) {
+        dokter.listPraktek.removeAt(i);
+        isSuccessedRemoveListPraktekFromDokter = true;
+        break;
+      }
+    }
+
+    if (isSuccessedRemoveListPraktekFromDokter == true) {
+      bool isFoundPendaftaran = false;
+      for (int i = 0; i < dataPendaftaran.length; i++) {
+        if (dataPendaftaran[i].dokter == pendaftaran.dokter &&
+            dataPendaftaran[i].pasien == pendaftaran.pasien &&
+            dataPendaftaran[i].penjadwalan == pendaftaran.penjadwalan) {
+          setState(() {
+            dataPendaftaran.removeAt(i);
+          });
+
+          isFoundPendaftaran = true;
+          break;
+        }
+      }
+
+      if (isFoundPendaftaran == true) {
+        // setState(() {
+        //   _dataPendaftaran.remove(pendaftaran);
+        // });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Berhasil Menyelesaikan!")));
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +116,14 @@ class ListPendaftaran extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    "Selesaikan",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
               ],
             ),
             ...dataPendaftaran.map(
@@ -67,6 +148,17 @@ class ListPendaftaran extends StatelessWidget {
                     child: Text(
                         "Hari : ${pendaftaran.penjadwalan!.hari} \n Waktu Mulai : ${pendaftaran.penjadwalan!.waktuMulai} \n Waktu Selesai : ${pendaftaran.penjadwalan!.waktuSelesai}",
                         textAlign: TextAlign.center),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          _handleSelesai(pendaftaran);
+                        },
+                        child: const Text("Selesai"),
+                      ),
+                    ),
                   ),
                 ],
               ),
