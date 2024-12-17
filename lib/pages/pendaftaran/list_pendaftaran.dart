@@ -12,14 +12,7 @@ class ListPendaftaran extends StatefulWidget {
 }
 
 class _ListPendaftaranState extends State<ListPendaftaran> {
-  late List<PendaftaranOption> _dataPendaftaran;
   List<PenjadwalanOption> penjadwalan = [];
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _dataPendaftaran = dataPendaftaran;
-  // }
 
   void _handleSelesai(PendaftaranOption pendaftaran) {
     bool isFoundDokter = false;
@@ -51,6 +44,13 @@ class _ListPendaftaranState extends State<ListPendaftaran> {
       }
     }
 
+    for(int i = 0;i < dataPenjadwalan.length;i++){
+      if(dataPenjadwalan[i] == pendaftaran.penjadwalan){
+        dataPenjadwalan.removeAt(i);
+        break;
+      }
+    }
+
     if (isSuccessedRemoveListPraktekFromDokter == true) {
       bool isFoundPendaftaran = false;
       for (int i = 0; i < dataPendaftaran.length; i++) {
@@ -67,10 +67,6 @@ class _ListPendaftaranState extends State<ListPendaftaran> {
       }
 
       if (isFoundPendaftaran == true) {
-        // setState(() {
-        //   _dataPendaftaran.remove(pendaftaran);
-        // });
-
         ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text("Berhasil Menyelesaikan!")));
       }
