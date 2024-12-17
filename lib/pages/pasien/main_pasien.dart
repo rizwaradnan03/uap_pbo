@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uap_pbo/main.dart';
 import 'package:uap_pbo/option/MenuOption.dart';
+import 'package:uap_pbo/pages/pasien/hapus_pasien.dart';
 import 'package:uap_pbo/pages/pasien/list_pasien.dart';
 import 'package:uap_pbo/pages/pasien/tambah_pasien.dart';
 
@@ -20,6 +21,13 @@ class MainPasien extends StatelessWidget {
         onTap: (BuildContext context) {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const TambahPasien()));
+        }),
+    MenuOption(
+        title: 'Hapus Pasien',
+        icon: Icons.delete,
+        onTap: (BuildContext context) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const HapusPasien()));
         }),
   ];
 
