@@ -2,6 +2,7 @@ import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:uap_pbo/pages/dokter/main_dokter.dart';
 import 'package:uap_pbo/pages/pasien/main_pasien.dart';
+import 'package:uap_pbo/pages/pendaftaran/main_pendaftaran.dart';
 import 'package:uap_pbo/pages/penjadwalan/main_penjadwalan.dart';
 import 'package:uap_pbo/option/MenuOption.dart';
 
@@ -44,6 +45,13 @@ class MenuScreen extends StatelessWidget {
         onTap: (BuildContext context) {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => MainPenjadwalan()));
+        }),
+    MenuOption(
+        title: 'Pendaftaran',
+        icon: Icons.check,
+        onTap: (BuildContext context) {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => MainPendaftaran()));
         }),
   ];
 

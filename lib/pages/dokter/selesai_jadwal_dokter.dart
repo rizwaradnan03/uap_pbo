@@ -143,7 +143,7 @@ class _SelesaiJadwalDokterState extends State<SelesaiJadwalDokter> {
                                 )
                               ],
                             )
-                          : SizedBox.shrink(),
+                          : const SizedBox.shrink(),
                     ],
                   ),
                 ),

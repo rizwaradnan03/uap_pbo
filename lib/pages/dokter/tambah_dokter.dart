@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:uap_pbo/database/data.dart';
 import 'package:uap_pbo/option/DokterOption.dart';
 import 'package:uap_pbo/pages/dokter/main_dokter.dart';
 
